@@ -13,7 +13,7 @@ namespace TodoAPI
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration; //Github test
         }
 
         public IConfiguration Configuration { get; }
