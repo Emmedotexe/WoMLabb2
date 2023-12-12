@@ -10,6 +10,6 @@ namespace TodoREST.Models
         public int BookingNumber { get; set; }
         public string CustomerName { get; set; }
         public string CustomerMail { get; set; }
-       
+        public Show BookedShow { get; set; }
     }
 }

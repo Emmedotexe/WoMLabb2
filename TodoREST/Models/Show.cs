@@ -9,5 +9,6 @@ namespace TodoREST.Models
         public int ID { get; set; }
         public string Location { get; set; }
         public DateTime Date { get; set; }
+        public Concert ConcertToShow { get; set; }
     }
 }

@@ -1,4 +1,8 @@
-﻿namespace TodoREST
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace TodoREST.Models
 {
     public class TodoItem
     {

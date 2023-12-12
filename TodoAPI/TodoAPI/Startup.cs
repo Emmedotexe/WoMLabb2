@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TodoAPI.Interfaces;
 using TodoAPI.Services;
+using TodoREST.Data;
 
 namespace TodoAPI
 {
@@ -23,6 +25,10 @@ namespace TodoAPI
         {
             services.AddSingleton<ITodoRepository, TodoRepository>();
             services.AddControllers();
+
+            services.AddMvc();
+            services.AddDbContext<ConcertContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
         #endregion
 
@@ -46,7 +52,9 @@ namespace TodoAPI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name:"default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
         #endregion
