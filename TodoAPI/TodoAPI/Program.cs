@@ -28,6 +28,7 @@ namespace TodoAPI
                 {
                     var context = services.GetRequiredService<ConcertContext>();
                     DbInitializer.Initialize(context);
+                    //context.Database.EnsureDeleted();
                 }
                 catch (Exception ex)
                 {

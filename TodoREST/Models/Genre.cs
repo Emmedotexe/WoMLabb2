@@ -5,8 +5,12 @@ using System.Text;
 
 namespace TodoREST.Models
 {
-    public enum Genre
+    public class Genre
     {
-        Rock, House, Pop, Rap, EPA_Dunk
+        public int GenreId { get; set; }
+        public string Title { get; set; }
+
+        public ICollection<ConcertGenre> ConcertGenres { get; set; }
+
     }
 }

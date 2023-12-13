@@ -18,40 +18,87 @@ namespace TodoREST.Data
                 return;
             }
 
-           
+            Genre rock = new Genre();
+            rock.Title = "Rock";
+            Genre pop = new Genre();
+            pop.Title = "Pop";
+            Genre house = new Genre();
+            house.Title = "House";
+            Genre rap = new Genre();
+            rap.Title = "Rap";
+            Genre epadunk = new Genre();
+            epadunk.Title = "Epa-Dunk";
+            context.Genres.Add(rock);
+            context.Genres.Add(pop);
+            context.Genres.Add(house);
+            context.Genres.Add(rap);
+            context.Genres.Add(epadunk);
+            
+
+
+
             Concert concert1 = new Concert
             {
                 Titel = "RockTorsdag!",
                 Description = "Rocka på, rocka på!",
                 Length = "3H",
-                Price = 500
+                Price = 500,
+                ConcertGenres = new List<ConcertGenre> { }
+                
             };
-            concert1.Genres.Add(Genre.Rock);
+
+            //-------------------Many-to-Many relationship-------------------------
+            ConcertGenre cGenre1 = new ConcertGenre();
+            cGenre1.Concert = concert1;
+            cGenre1.Genre = rock;
+            concert1.ConcertGenres.Add(cGenre1);
+            //---------------------------------------------------------------------
 
             Concert concert2 = new Concert
             {
                 Titel = "EPA Fredag",
                 Description = "EPA dunk till öronen faller av.",
                 Length = "2H",
-                Price = 400
+                Price = 400,
+                ConcertGenres = new List<ConcertGenre> { }
             };
-            concert2.Genres.Add(Genre.EPA_Dunk);
+
+            //-------------------Many-to-Many relationship-------------------------
+            ConcertGenre cGenre2 = new ConcertGenre();
+            cGenre2.Concert = concert2;
+            cGenre2.Genre = epadunk;
+            concert2.ConcertGenres.Add(cGenre2);
+            //---------------------------------------------------------------------
 
             Concert concert3 = new Concert
             {
                 Titel = "SMASHED",
                 Description = "Bästa NPC blandningen för riktiga normies",
                 Length = "8H",
-                Price = 3000
+                Price = 3000,
+                ConcertGenres = new List<ConcertGenre> { }
             };
-            concert3.Genres.Add(Genre.Pop);
-            concert3.Genres.Add(Genre.Rap);
-            concert3.Genres.Add(Genre.House);
+
+            //-------------------Many-to-Many relationship-------------------------
+            ConcertGenre cGenre3 = new ConcertGenre();
+            cGenre3.Concert = concert3;
+            cGenre3.Genre = pop;
+            ConcertGenre cGenre4 = new ConcertGenre();
+            cGenre4.Concert = concert3;
+            cGenre4.Genre = rap; 
+            ConcertGenre cGenre5 = new ConcertGenre();
+            cGenre5.Concert = concert3;
+            cGenre5.Genre = house;
+            concert3.ConcertGenres.Add(cGenre3);
+            concert3.ConcertGenres.Add(cGenre4);
+            concert3.ConcertGenres.Add(cGenre5);
+            //---------------------------------------------------------------------
+
 
             context.Concerts.Add(concert1);
             context.Concerts.Add(concert2);
             context.Concerts.Add(concert3);
-            context.SaveChanges();
+
 
 
             Show show1 = new Show { Location = "Ullevi", ConcertToShow = concert1, Date = new DateTime(2023, 06, 15, 16, 00, 00) };
@@ -61,7 +108,7 @@ namespace TodoREST.Data
             context.Shows.Add(show1);
             context.Shows.Add(show2);
             context.Shows.Add(show3);
-            context.SaveChanges();
+
 
             var Bookings = new Booking[]
             {

@@ -9,14 +9,11 @@ namespace TodoREST.Models
     {
         public int ID { get; set; }
         public string Titel { get; set; }
-        [NotMapped]
-        public List<Genre> Genres { get; set; }
         public string Description { get; set; }
         public string Length { get; set; }
         public int Price { get; set; }
-        public Concert()
-        {
-            Genres = new List<Genre>();
-        }
+
+        public ICollection<ConcertGenre> ConcertGenres { get; set; }
+
     }
 }
