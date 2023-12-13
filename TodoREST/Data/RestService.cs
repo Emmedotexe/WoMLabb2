@@ -15,6 +15,7 @@ namespace TodoREST
         JsonSerializerOptions serializerOptions;
 
         public List<TodoItem> Items { get; private set; }
+        public List<Concert> Concerts { get; private set; }
 
         public RestService()
         {

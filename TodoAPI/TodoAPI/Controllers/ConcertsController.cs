@@ -10,6 +10,8 @@ using TodoREST.Models;
 
 namespace TodoAPI.Controllers
 {
+        [ApiController]
+        [Route("api/[controller]")]
     public class ConcertsController : Controller
     {
         private readonly ConcertContext _context;
@@ -20,6 +22,11 @@ namespace TodoAPI.Controllers
         }
 
         // GET: Concerts
+        [HttpGet]
+        public IActionResult List()
+        {
+            return Ok(_context.Concerts);
+        }
         public async Task<IActionResult> Index()
         {
             return View(await _context.Concerts.ToListAsync());
