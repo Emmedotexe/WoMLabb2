@@ -14,17 +14,17 @@ namespace TodoREST
 			restService = service;
 		}
 
-		public Task<List<TodoItem>> GetTasksAsync ()
+		public Task<List<Concert>> GetTasksAsync ()
 		{
 			return restService.RefreshDataAsync ();	
 		}
 
-		public Task SaveTaskAsync (TodoItem item, bool isNewItem = false)
+		public Task SaveTaskAsync (Concert item, bool isNewItem = false)
 		{
 			return restService.SaveTodoItemAsync (item, isNewItem);
 		}
 
-		public Task DeleteTaskAsync (TodoItem item)
+		public Task DeleteTaskAsync (Concert item)
 		{
 			return restService.DeleteTodoItemAsync (item.ID);
 		}

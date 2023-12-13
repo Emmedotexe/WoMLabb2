@@ -27,9 +27,9 @@ namespace TodoREST
             };
         }
 
-        public async Task<List<TodoItem>> RefreshDataAsync()
+        public async Task<List<Concert>> RefreshDataAsync()
         {
-            Items = new List<TodoItem>();
+            Concerts = new List<Concert>();
 
             Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
             try
@@ -38,7 +38,7 @@ namespace TodoREST
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Items = JsonSerializer.Deserialize<List<TodoItem>>(content, serializerOptions);
+                    Concerts = JsonSerializer.Deserialize<List<Concert>>(content, serializerOptions);
                 }
             }
             catch (Exception ex)
@@ -46,16 +46,16 @@ namespace TodoREST
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
 
-            return Items;
+            return Concerts;
         }
 
-        public async Task SaveTodoItemAsync(TodoItem item, bool isNewItem = false)
+        public async Task SaveTodoItemAsync(Concert item, bool isNewItem = false)
         {
             Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
 
             try
             {
-                string json = JsonSerializer.Serialize<TodoItem>(item, serializerOptions);
+                string json = JsonSerializer.Serialize<Concert>(item, serializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = null;
@@ -80,7 +80,7 @@ namespace TodoREST
             }
         }
 
-        public async Task DeleteTodoItemAsync(string id)
+        public async Task DeleteTodoItemAsync(int id)
         {
             Uri uri = new Uri(string.Format(Constants.RestUrl, id));
 

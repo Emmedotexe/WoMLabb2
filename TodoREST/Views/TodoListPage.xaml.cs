@@ -15,7 +15,7 @@ namespace TodoREST
 		{
 			base.OnAppearing ();
 
-			//listView.ItemsSource = await 
+			listView.ItemsSource = await App.ConcertManager.GetTasksAsync();
 		}
 
 		async void OnAddItemClicked (object sender, EventArgs e)

@@ -6,10 +6,10 @@ namespace TodoREST
 {
 	public interface IRestService
 	{
-		Task<List<TodoItem>> RefreshDataAsync ();
+		Task<List<Concert>> RefreshDataAsync ();
 
-		Task SaveTodoItemAsync (TodoItem item, bool isNewItem);
+		Task SaveTodoItemAsync (Concert item, bool isNewItem);
 
-		Task DeleteTodoItemAsync (string id);
+		Task DeleteTodoItemAsync (int id);
 	}
 }

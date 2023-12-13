@@ -12,12 +12,16 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
+
     <ListView x:Name="listView" ItemSelected="OnItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="{Binding Title}"/>
-                </StackLayout>
+                <ViewCell>
+                    <StackLayout>
+                        <Label FontAttributes="Bold" Text="{Binding Titel} "/>
+                        <Label Text="{Binding Length}"/>
+                    </StackLayout>
+                </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
