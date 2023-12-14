@@ -78,7 +78,7 @@
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.6.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2622" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
     <PackageReference Include="System.Text.Json">
       <Version>5.0.1</Version>
     </PackageReference>

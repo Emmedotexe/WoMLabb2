@@ -119,6 +119,9 @@ namespace TodoREST.Data
             {
                 context.Bookings.Add(b);
             }
+            context.ConcertGenres.AddRange(cGenre1, cGenre2, cGenre3, cGenre4, cGenre5);
+
+
             context.SaveChanges();
         }
     }

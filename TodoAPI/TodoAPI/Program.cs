@@ -4,6 +4,8 @@ using Microsoft.Extensions.Logging;
 using TodoREST.Data;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using TodoAPI.Controllers;
+
 
 namespace TodoAPI
 {
@@ -28,7 +30,9 @@ namespace TodoAPI
                 {
                     var context = services.GetRequiredService<ConcertContext>();
                     DbInitializer.Initialize(context);
+
                     //context.Database.EnsureDeleted();
+
                 }
                 catch (Exception ex)
                 {

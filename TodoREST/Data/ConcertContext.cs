@@ -15,6 +15,7 @@ namespace TodoREST.Data
         public DbSet<Booking> Bookings{ get; set; }
         public DbSet<Show> Shows{ get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<ConcertGenre> ConcertGenres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

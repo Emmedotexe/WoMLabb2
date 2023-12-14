@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="TodoREST.TodoListPage"
              Title="Todo">
-    <ContentPage.ToolbarItems>
+
+        <ContentPage.ToolbarItems>
         <ToolbarItem Text="+" Clicked="OnAddItemClicked">
             <ToolbarItem.IconImageSource>
                 <OnPlatform x:TypeArguments="ImageSource">
@@ -12,17 +13,42 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-
-    <ListView x:Name="listView" ItemSelected="OnItemSelected">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout>
-                        <Label FontAttributes="Bold" Text="{Binding Titel} "/>
-                        <Label Text="{Binding Length}"/>
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+    <StackLayout><!--Picker-->
+        <Picker Title="Select Genre">
+            <Picker.Items>
+                <x:String>Rock</x:String>
+                <x:String>Pop</x:String>
+                <x:String>House</x:String>
+                <x:String>Rap</x:String>
+                <x:String>Epa-Dunk</x:String>
+            </Picker.Items>
+        </Picker>
+        <ListView x:Name="ItemsListView" 
+              ItemsSource="{Binding Items}"/>
+        <ListView x:Name="listView" ItemSelected="OnItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" >
+                            <Label FontAttributes="Bold" Text="{Binding Titel}"/>
+                            <Label Text="{Binding Length}"/>
+                            <StackLayout Orientation="Horizontal">
+                                <ListView ItemsSource="{Binding Genres}" HasUnevenRows="True">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding Title}"/>
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

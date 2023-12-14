@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 using TodoREST.Data;
 using TodoREST.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TodoAPI.Controllers
 {
@@ -25,8 +27,32 @@ namespace TodoAPI.Controllers
         [HttpGet]
         public IActionResult List()
         {
-            return Ok(_context.Concerts);
+            return Ok(PopulateGenres());
+
         }
+        public List<Concert> PopulateGenres() {
+            List<Concert> concerts = new List<Concert>(); 
+           
+            foreach (var item in _context.Concerts)
+            {
+                item.Genres = new List<Genre>();
+                var concertGenresQuery =
+            from cg in _context.ConcertGenres
+            where cg.ConcertId == item.ID
+            join g in _context.Genres on cg.GenreId equals g.GenreId
+            select g;
+
+                foreach (Genre g in concertGenresQuery)
+                {
+                    
+                    item.Genres.Add(g);
+                }
+                concerts.Add(item);
+            }
+            
+            return concerts;
+        }
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Concerts.ToListAsync());

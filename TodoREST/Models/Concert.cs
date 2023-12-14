@@ -12,6 +12,8 @@ namespace TodoREST.Models
         public string Description { get; set; }
         public string Length { get; set; }
         public int Price { get; set; }
+        [NotMapped]
+        public List<Genre> Genres { get; set; }
 
         public ICollection<ConcertGenre> ConcertGenres { get; set; }
 
