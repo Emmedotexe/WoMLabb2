@@ -4,7 +4,7 @@
              x:Class="TodoREST.TodoListPage"
              Title="Todo">
 
-        <ContentPage.ToolbarItems>
+    <ContentPage.ToolbarItems>
         <ToolbarItem Text="+" Clicked="OnAddItemClicked">
             <ToolbarItem.IconImageSource>
                 <OnPlatform x:TypeArguments="ImageSource">
@@ -13,18 +13,18 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <StackLayout><!--Picker-->
-        <Picker Title="Select Genre">
+    
+    <StackLayout>
+        <Picker x:Name="genrePicker" Title="Select Genre" SelectedIndexChanged="Picker_SelectedIndexChanged">
             <Picker.Items>
+                <x:String>ALL</x:String>
                 <x:String>Rock</x:String>
                 <x:String>Pop</x:String>
-                <x:String>House</x:String>
                 <x:String>Rap</x:String>
+                <x:String>House</x:String>
                 <x:String>Epa-Dunk</x:String>
             </Picker.Items>
         </Picker>
-        <ListView x:Name="ItemsListView" 
-              ItemsSource="{Binding Items}"/>
         <ListView x:Name="listView" ItemSelected="OnItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>

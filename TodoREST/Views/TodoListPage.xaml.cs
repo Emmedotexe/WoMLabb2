@@ -3,14 +3,19 @@ using Xamarin.Forms;
 using TodoREST.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Collections.Generic;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using TodoREST.ViewModel;
+
 
 namespace TodoREST
 {
 	public partial class TodoListPage : ContentPage
 
 	{
-		public ObservableCollection<Concert> ConcertList { get; set; }
-        public ObservableCollection<Genre> GenreList { get; set; }
+
+		public List<Genre> GenreList { get; set; }
+        public List<Concert> ConcertList { get; set; }
 
         public TodoListPage ()
 		{
@@ -22,13 +27,22 @@ namespace TodoREST
 			base.OnAppearing ();
 
 			listView.ItemsSource = await App.ConcertManager.GetTasksAsync();
-			ConcertList = new ObservableCollection<Concert>();
+            GenreList = new List<Genre>();
+            ConcertList = new List<Concert>();
 
-			foreach (Concert item in listView.ItemsSource)
-			{
-				ConcertList.Add(item);
-			}
-		}
+            foreach (Concert item in listView.ItemsSource)
+            {
+                ConcertList.Add(item);
+                foreach (Genre g in item.Genres)
+                {
+                    GenreList.Add(g);
+                }
+            }
+            GenreList.Distinct().ToList();
+
+          
+
+        }
 
 		async void OnAddItemClicked (object sender, EventArgs e)
 		{
@@ -49,6 +63,28 @@ namespace TodoREST
             });
 		}
 
-        
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string genre = genrePicker.SelectedItem.ToString();
+            List<Concert> filteredConcerts = new List<Concert> ();
+
+            if (genre == "ALL") 
+            {
+                listView.ItemsSource = ConcertList;
+                return;
+            }
+
+            foreach (var item in ConcertList)
+            {
+                foreach(var g in item.Genres)
+                {
+                    if (g.Title == genre)
+                    {
+                        filteredConcerts.Add(item);
+                    }
+                }
+            }
+            listView.ItemsSource = filteredConcerts;
+        }
     }
 }
