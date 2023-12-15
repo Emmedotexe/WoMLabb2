@@ -7,8 +7,9 @@ namespace TodoREST
 	public interface IRestService
 	{
 		Task<List<Concert>> RefreshDataAsync ();
+        Task<List<Show>> RefreshShowAsync();
 
-		Task SaveTodoItemAsync (Concert item, bool isNewItem);
+        Task SaveTodoItemAsync (Concert item, bool isNewItem);
 
 		Task DeleteTodoItemAsync (int id);
 	}

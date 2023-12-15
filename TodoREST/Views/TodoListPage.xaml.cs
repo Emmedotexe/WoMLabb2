@@ -44,22 +44,13 @@ namespace TodoREST
 
         }
 
-		async void OnAddItemClicked (object sender, EventArgs e)
-		{
-            await Navigation.PushAsync(new TodoItemPage(true)
-            {
-                BindingContext = new TodoItem
-                {
-                    ID = Guid.NewGuid().ToString()
-                }
-            });
-		}
+
 
 		async void OnItemSelected (object sender, SelectedItemChangedEventArgs e)
 		{
-            await Navigation.PushAsync(new TodoItemPage
+            await Navigation.PushAsync(new TodoItemPage(e.SelectedItem as Concert)
             {
-                BindingContext = e.SelectedItem as TodoItem
+                //BindingContext = e.SelectedItem as Concert
             });
 		}
 

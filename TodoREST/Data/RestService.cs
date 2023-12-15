@@ -16,6 +16,7 @@ namespace TodoREST
 
         public List<TodoItem> Items { get; private set; }
         public List<Concert> Concerts { get; private set; }
+        public List<Show> Shows { get; private set; }
 
         public RestService()
         {
@@ -47,6 +48,27 @@ namespace TodoREST
             }
 
             return Concerts;
+        }
+        public async Task<List<Show>> RefreshShowAsync()
+        {
+            Shows = new List<Show>();
+
+            Uri uri = new Uri(string.Format(Constants.RestUrl+"Shows", string.Empty));
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Shows = JsonSerializer.Deserialize<List<Show>>(content, serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return Shows;
         }
 
         public async Task SaveTodoItemAsync(Concert item, bool isNewItem = false)

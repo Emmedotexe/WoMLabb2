@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:TodoREST.ViewModel"
 			 x:Class="TodoREST.TodoItemPage" 
 			 Title="Todo">
+
+    <ContentPage.BindingContext>
+        <local:ShowViewModel/>
+    </ContentPage.BindingContext>
+    
+    
+    
 	<StackLayout Margin="20">
-		<Label Text="Name" />
-		<Entry Text="{Binding Path=Name}" 
-               Placeholder="Enter item" />
-		<Label Text="Notes" />
-		<Entry Text="{Binding Path=Notes}"
-               Placeholder="Enter notes" />
-		<Label Text="Done" />
-		<Switch IsToggled="{Binding Path=Done}" />
-		<Button Text="Save" 
-                Clicked="OnSaveButtonClicked" />
-		<Button Text="Delete"
+        <ListView x:Name="listView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label TextDecorations="Underline" FontAttributes="Bold" Text="Location:"/>
+                        <Label Text="{Binding Location}"/>
+                            <Label TextDecorations="Underline" FontAttributes="Bold" Text=" Date: "/>
+                        <Label Text="{Binding Date, StringFormat='{0:hh:mm tt}'}"/>
+                        </StackLayout>
+                </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Delete"
                 Clicked="OnDeleteButtonClicked" />
 		<Button Text="Cancel" 
                 Clicked="OnCancelButtonClicked" />

@@ -49,9 +49,45 @@ namespace TodoAPI.Controllers
                 }
                 concerts.Add(item);
             }
-            
             return concerts;
         }
+
+        [Route("Shows")]
+        public IActionResult Shows()
+        {
+            return Ok(PopulateConcerts());
+        }
+
+        public List<Show> PopulateConcerts()
+        {
+            var showWithConcert = _context.Shows.Include(s => s.ConcertToShow);
+
+            return PopulateGenres(showWithConcert.ToList());
+        }
+
+        public List<Show> PopulateGenres(List<Show> shows)
+        {
+            
+            foreach (var show in shows)
+            {
+                show.ConcertToShow.Genres = new List<Genre>();
+
+                var concertGenresQuery =
+                from cg in _context.ConcertGenres
+                where cg.ConcertId == show.ConcertToShow.ID
+                join g in _context.Genres on cg.GenreId equals g.GenreId
+                select g;
+
+                    foreach (Genre g in concertGenresQuery)
+                    {
+                       show.ConcertToShow.Genres.Add(g);
+                    }
+            }
+            return shows;
+        }
+            
+        
+
 
         public async Task<IActionResult> Index()
         {

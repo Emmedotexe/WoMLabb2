@@ -5,7 +5,7 @@
              Title="Todo">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+" Clicked="OnAddItemClicked">
+        <ToolbarItem Text="+">
             <ToolbarItem.IconImageSource>
                 <OnPlatform x:TypeArguments="ImageSource">
                     <On Platform="Android, UWP" Value="plus.png" />
