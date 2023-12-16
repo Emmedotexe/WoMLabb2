@@ -102,12 +102,29 @@ namespace TodoREST.Data
 
 
             Show show1 = new Show { Location = "Ullevi", ConcertToShow = concert1, Date = new DateTime(2023, 06, 15, 16, 00, 00) };
-            Show show2 = new Show { Location = "Backgården", ConcertToShow = concert2, Date = new DateTime(2023, 08, 20, 22, 00, 00) };
+            Show show15 = new Show { Location = "Ullevi", ConcertToShow = concert1, Date = new DateTime(2023, 06, 17, 16, 00, 00) };
+            Show show155 = new Show { Location = "Ullevi", ConcertToShow = concert1, Date = new DateTime(2023, 06, 20, 16, 00, 00) };
+
+            Show show2 = new Show { Location = "Bakgården", ConcertToShow = concert2, Date = new DateTime(2023, 08, 20, 22, 00, 00) };
+            Show show25 = new Show { Location = "Bakgården", ConcertToShow = concert2, Date = new DateTime(2023, 08, 22, 22, 00, 00) };
+            Show show255 = new Show { Location = "Bakgården", ConcertToShow = concert2, Date = new DateTime(2023, 08, 30, 22, 00, 00) };
+
             Show show3 = new Show { Location = "Avicii Arena", ConcertToShow = concert3, Date = new DateTime(2023, 10, 5, 18, 00, 00) };
+            Show show35 = new Show { Location = "Avicii Arena", ConcertToShow = concert3, Date = new DateTime(2023, 10, 7, 18, 00, 00) };
+            Show show355 = new Show { Location = "Avicii Arena", ConcertToShow = concert3, Date = new DateTime(2023, 10, 15, 18, 00, 00) };
+
 
             context.Shows.Add(show1);
+            context.Shows.Add(show15);
+            context.Shows.Add(show155);
+
             context.Shows.Add(show2);
+            context.Shows.Add(show25);
+            context.Shows.Add(show255);
+
             context.Shows.Add(show3);
+            context.Shows.Add(show35);
+            context.Shows.Add(show355);
 
 
             var Bookings = new Booking[]
