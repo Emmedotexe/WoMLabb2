@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:local="clr-namespace:TodoREST.ViewModel"
 			 x:Class="TodoREST.TodoItemPage" 
 			 Title="Todo">
 
-    <ContentPage.BindingContext>
-        <local:ShowViewModel/>
-    </ContentPage.BindingContext>
+
     
     
     
@@ -16,13 +13,20 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal">
-                        <Label TextDecorations="Underline" FontAttributes="Bold" Text="Location:"/>
-                        <Label Text="{Binding Location}"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label TextDecorations="Underline" FontAttributes="Bold" Text="Location:">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Text="{Binding Location}"/>
                             <Label TextDecorations="Underline" FontAttributes="Bold" Text=" Date: "/>
-                        <Label Text="{Binding Date, StringFormat='{0:hh:mm tt}'}"/>
+                            <Label Text="{Binding Date, StringFormat='{0:MMMM dd}'}"/>
+                            <Label TextDecorations="Underline" FontAttributes="Bold" Text=" Time: "/>
+                            <Label Text="{Binding Date, StringFormat='{0:HH:mm}'}"/>
+
                         </StackLayout>
-                </ViewCell>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
