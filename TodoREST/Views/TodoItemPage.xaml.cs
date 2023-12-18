@@ -3,12 +3,14 @@ using Xamarin.Forms;
 using TodoREST.Models;
 using TodoREST.ViewModel;
 using System.Collections.Generic;
+using TodoREST.Views;
 
 namespace TodoREST
 {
 	public partial class TodoItemPage : ContentPage
 	{
 		public Concert Concert;
+		private string desription;
 
         public TodoItemPage (Concert concert)
 		{
@@ -21,7 +23,7 @@ namespace TodoREST
 			base.OnAppearing();
 
 			listView.ItemsSource = FilterShows(await App.ConcertManager.GetShowAsync());
-
+			
         }
 
 		private List<Show> FilterShows(List<Show> allShows)
@@ -32,6 +34,7 @@ namespace TodoREST
 				if (this.Concert.ID == show.ConcertToShow.ID)
 				{
 					filtered.Add(show);
+					desription = show.ConcertToShow.Description;
 				}
 			}
 			return filtered;
@@ -55,5 +58,25 @@ namespace TodoREST
 		{
 			await Navigation.PopAsync ();
 		}
-	}
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e) 
+		{ 
+        
+			DetailsView.IsVisible = true;
+			infoBox.Text = desription;
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+			DetailsView.IsVisible = false;
+        }
+
+        async void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            await Navigation.PushAsync(new BookingPage(e.SelectedItem as Show)
+            {
+                //BindingContext = e.SelectedItem as Concert
+            });
+        }
+    }
 }

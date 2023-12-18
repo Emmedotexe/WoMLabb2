@@ -101,6 +101,31 @@ namespace TodoREST
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
         }
+        public async Task SaveBookingItemAsync(Booking item)
+        {
+            Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
+
+            try
+            {
+                string json = JsonSerializer.Serialize<Booking>(item, serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                
+                response = await client.PostAsync(uri, content);
+                
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\tBooking successfully saved.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
 
         public async Task DeleteTodoItemAsync(int id)
         {

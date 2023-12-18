@@ -5,34 +5,44 @@
 			 Title="Todo">
 
 
-    
-    
-    
-	<StackLayout Margin="20">
-        <ListView x:Name="listView">
+
+
+    <StackLayout Margin="20" >
+        <Label Text="[Info]" FontAttributes="Bold" TextDecorations="Underline">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+            </Label.GestureRecognizers>
+        </Label>
+        <ListView x:Name="listView" ItemSelected="listView_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                <ViewCell>
+                    <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <Label TextDecorations="Underline" FontAttributes="Bold" Text="Location:">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                                </Label.GestureRecognizers>
-                            </Label>
+
+                            <Label  FontAttributes="Bold" Text="Location:"/>
                             <Label Text="{Binding Location}"/>
-                            <Label TextDecorations="Underline" FontAttributes="Bold" Text=" Date: "/>
+                            <Label FontAttributes="Bold" Text=" Date: "/>
                             <Label Text="{Binding Date, StringFormat='{0:MMMM dd}'}"/>
-                            <Label TextDecorations="Underline" FontAttributes="Bold" Text=" Time: "/>
+                            <Label FontAttributes="Bold" Text=" Time: "/>
                             <Label Text="{Binding Date, StringFormat='{0:HH:mm}'}"/>
+                            <Label FontAttributes="Bold" Text="Price"/>
+                            <Label Text="{Binding Price}"/>
 
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Delete"
-                Clicked="OnDeleteButtonClicked" />
-		<Button Text="Cancel" 
-                Clicked="OnCancelButtonClicked" />
-	</StackLayout>
+        
+        <ContentView x:Name="DetailsView" IsVisible="False">
+            <StackLayout>
+                <!-- Your detailed information controls go here -->
+                <Label x:Name="infoBox"/>
+                <!-- Add other controls as needed -->
+
+                <!-- Close button -->
+                <Button Text="Close" Clicked="Button_Clicked" />
+            </StackLayout>
+        </ContentView>
+    </StackLayout>
 </ContentPage>

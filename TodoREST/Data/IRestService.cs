@@ -10,7 +10,8 @@ namespace TodoREST
         Task<List<Show>> RefreshShowAsync();
 
         Task SaveTodoItemAsync (Concert item, bool isNewItem);
+        Task SaveBookingItemAsync(Booking booking);
 
-		Task DeleteTodoItemAsync (int id);
+        Task DeleteTodoItemAsync (int id);
 	}
 }

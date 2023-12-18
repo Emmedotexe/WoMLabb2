@@ -25,9 +25,9 @@ namespace TodoREST.Data
             return restService.RefreshShowAsync();
         }
 
-        public Task SaveTaskAsync(Concert item, bool isNewItem = false)
+        public Task SaveTaskAsync(Booking item)
         {
-            return restService.SaveTodoItemAsync(item, isNewItem);
+            return restService.SaveBookingItemAsync(item);
         }
 
         public Task DeleteTaskAsync(Concert item)

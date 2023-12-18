@@ -40,11 +40,7 @@ namespace TodoREST
             }
             GenreList.Distinct().ToList();
 
-          
-
         }
-
-
 
 		async void OnItemSelected (object sender, SelectedItemChangedEventArgs e)
 		{
