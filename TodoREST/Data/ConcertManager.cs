@@ -29,6 +29,10 @@ namespace TodoREST.Data
         {
             return restService.SaveBookingItemAsync(item);
         }
+        public Task<Booking> FindBookingAsync(int id)
+        {
+            return restService.FindBookingItemAsync(id);
+        }
 
         public Task DeleteTaskAsync(Concert item)
         {

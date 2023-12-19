@@ -11,7 +11,7 @@ namespace TodoREST
 
         Task SaveTodoItemAsync (Concert item, bool isNewItem);
         Task SaveBookingItemAsync(Booking booking);
-
+        Task<Booking> FindBookingItemAsync(int id);
         Task DeleteTodoItemAsync (int id);
 	}
 }

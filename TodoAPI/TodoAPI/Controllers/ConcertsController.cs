@@ -119,6 +119,26 @@ namespace TodoAPI.Controllers
             return Ok(item);
         }
 
+        //GET: Concerts/Find/5
+        
+        [Route("Find")]
+        public IActionResult Find(int? id)
+        {
+            try
+            {
+                var item = _context.Bookings.Include(b=> b.BookedShow).Include(b => b.BookedShow.ConcertToShow).FirstOrDefault(b => b.ID == id);
+                if (item == null)
+                {
+                    return NotFound(ErrorCode.RecordNotFound.ToString());
+                }
+                return Ok(item);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ErrorCode.RecordNotFound.ToString());
+            }
+        }
+
 
         #region
         //public async Task<IActionResult> Index()

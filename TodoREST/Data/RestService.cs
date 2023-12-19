@@ -17,6 +17,7 @@ namespace TodoREST
         public List<TodoItem> Items { get; private set; }
         public List<Concert> Concerts { get; private set; }
         public List<Show> Shows { get; private set; }
+        public Booking Cbooking { get; private set; }
 
         public RestService()
         {
@@ -66,11 +67,59 @@ namespace TodoREST
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                throw ex;
             }
-
             return Shows;
         }
 
+        public async Task<Booking> FindBookingItemAsync(int id)
+        {
+            
+            Cbooking = new Booking();
+            Uri uri = new Uri(string.Format(Constants.RestUrl + "Find/?id=" + id, string.Empty));
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Cbooking = JsonSerializer.Deserialize<Booking>(content, serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return Cbooking;
+        }
+
+        public async Task SaveBookingItemAsync(Booking item)
+        {
+            Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
+
+            try
+            {
+                string json = JsonSerializer.Serialize<Booking>(item, serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                
+                response = await client.PostAsync(uri, content);
+                
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\tBooking successfully saved.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+        #region TodoMethods
         public async Task SaveTodoItemAsync(Concert item, bool isNewItem = false)
         {
             Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
@@ -101,31 +150,6 @@ namespace TodoREST
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
         }
-        public async Task SaveBookingItemAsync(Booking item)
-        {
-            Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
-
-            try
-            {
-                string json = JsonSerializer.Serialize<Booking>(item, serializerOptions);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = null;
-                
-                response = await client.PostAsync(uri, content);
-                
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Debug.WriteLine(@"\tBooking successfully saved.");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-        }
 
         public async Task DeleteTodoItemAsync(int id)
         {
@@ -147,4 +171,5 @@ namespace TodoREST
             }
         }
     }
+    #endregion
 }
