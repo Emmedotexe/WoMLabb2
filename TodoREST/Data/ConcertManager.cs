@@ -34,9 +34,9 @@ namespace TodoREST.Data
             return restService.FindBookingItemAsync(id);
         }
 
-        public Task DeleteTaskAsync(Concert item)
+        public Task DeleteTaskAsync(Booking item)
         {
-            return restService.DeleteTodoItemAsync(item.ID);
+            return restService.DeleteBookingAsync(item.ID);
         }
     }
 }

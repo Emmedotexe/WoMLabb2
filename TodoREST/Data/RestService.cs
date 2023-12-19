@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json;
+using System.Threading.Tasks;
 using TodoREST.Models;
 
 namespace TodoREST
@@ -54,7 +54,7 @@ namespace TodoREST
         {
             Shows = new List<Show>();
 
-            Uri uri = new Uri(string.Format(Constants.RestUrl+"Shows", string.Empty));
+            Uri uri = new Uri(string.Format(Constants.RestUrl + "Shows", string.Empty));
             try
             {
                 HttpResponseMessage response = await client.GetAsync(uri);
@@ -74,7 +74,7 @@ namespace TodoREST
 
         public async Task<Booking> FindBookingItemAsync(int id)
         {
-            
+
             Cbooking = new Booking();
             Uri uri = new Uri(string.Format(Constants.RestUrl + "Find/?id=" + id, string.Empty));
             try
@@ -104,13 +104,33 @@ namespace TodoREST
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = null;
-                
+
                 response = await client.PostAsync(uri, content);
-                
+
 
                 if (response.IsSuccessStatusCode)
                 {
                     Debug.WriteLine(@"\tBooking successfully saved.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
+        public async Task DeleteBookingAsync(int id)
+        {
+            Uri uri = new Uri(string.Format(Constants.RestUrl, id));
+
+            try
+            {
+                HttpResponseMessage response = await client.DeleteAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\tTodoItem successfully deleted.");
                 }
 
             }

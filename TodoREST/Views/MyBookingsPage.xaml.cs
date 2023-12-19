@@ -45,5 +45,10 @@ namespace TodoREST.Views
             showLocation.Text = booking.BookedShow.Location;
             showPrice.Text = booking.BookedShow.ConcertToShow.Price.ToString();
         }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await App.ConcertManager.DeleteTaskAsync(booking);
+        }
     }
 }

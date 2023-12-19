@@ -139,6 +139,27 @@ namespace TodoAPI.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var item = _context.Bookings.Find(id);
+                if (item == null)
+                {
+                    return NotFound(ErrorCode.RecordNotFound.ToString());
+                }
+                _context.Bookings.Remove(item);
+                _context.SaveChanges();
+            }
+
+            catch (Exception)
+            {
+                return BadRequest(ErrorCode.CouldNotDeleteItem.ToString());
+            }
+            return NoContent();
+        }
+
 
         #region
         //public async Task<IActionResult> Index()
