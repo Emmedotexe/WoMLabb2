@@ -6,6 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using TodoREST.ViewModel;
+using TodoREST.Views;
 
 
 namespace TodoREST
@@ -72,6 +73,14 @@ namespace TodoREST
                 }
             }
             listView.ItemsSource = filteredConcerts;
+        }
+
+        async void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MyBookingsPage()
+            {
+                //BindingContext = e.SelectedItem as Concert
+            });
         }
     }
 }

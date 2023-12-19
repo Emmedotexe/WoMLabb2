@@ -78,5 +78,10 @@ namespace TodoREST
                 //BindingContext = e.SelectedItem as Concert
             });
         }
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

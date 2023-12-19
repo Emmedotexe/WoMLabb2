@@ -100,7 +100,16 @@ namespace TodoAPI.Controllers
                 {
                     return StatusCode(StatusCodes.Status409Conflict, ErrorCode.TodoItemIDInUse.ToString());
                 }
-                _context.Bookings.Add(item);
+
+
+                Booking newBooking = new Booking()
+                {
+                    CustomerMail = item.CustomerMail,
+                    CustomerName = item.CustomerName,
+                    BookedShow = _context.Shows.Find(item.BookedShow.ID),
+                    BookingNumber = item.BookingNumber
+                };
+                _context.Bookings.Add(newBooking);
                 _context.SaveChanges(); //Cannot insert explicit value for identity column in table 'Concert' when IDENTITY_INSERT is set to OFF
             }
             catch (Exception)

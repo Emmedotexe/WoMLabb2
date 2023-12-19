@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoREST.Views.MyBookingsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label FontSize="Title" Text="My Bookings"/>
+            <StackLayout Orientation="Horizontal" BackgroundColor="LightGray">
+                <Label VerticalTextAlignment="Center" Text="Search"/>
+                <Entry Margin="5" Placeholder="Enter Bookingnumber"/>
+            </StackLayout>
+            
+            
+            
+            <Label Text="Name"/>
+            <Label x:Name="bName"/>
+            <Label Text="Email"/>
+            <Label x:Name="bMail"/>
+            <Label Text=""/>
+            <Label Text="Concert" />
+            <Label x:Name="concertLabel"/>
+            <Label Text="Date" />
+            <Label x:Name="showDate"/>
+            <Label Text="Location"/>
+            <Label x:Name="showLocation"/>
+            <Label Text="Price"/>
+            <Label x:Name="showPrice"/>
+            
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

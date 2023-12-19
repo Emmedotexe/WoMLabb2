@@ -5,13 +5,7 @@
              Title="Todo">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+">
-            <ToolbarItem.IconImageSource>
-                <OnPlatform x:TypeArguments="ImageSource">
-                    <On Platform="Android, UWP" Value="plus.png" />
-                </OnPlatform>
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
+        <ToolbarItem Text="My Bookings" Clicked="ToolbarItem_Clicked" />
     </ContentPage.ToolbarItems>
     
     <StackLayout>

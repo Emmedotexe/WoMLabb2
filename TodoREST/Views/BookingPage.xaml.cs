@@ -40,5 +40,10 @@ namespace TodoREST.Views
             await Navigation.PopAsync();
 
         }
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
